@@ -1,13 +1,13 @@
 /* eslint-disable */
-let Pokedex = require('pokedex-promise-v2');
-var options = {
-  protocol: 'https',
-  hostName: 'https://pokemon48.herokuapp.com/',
-  versionPath: '/api/v2/',
-  cacheLimit: 100 * 1000, // 100s
-  timeout: 5 * 1000 // 5s
-}
-let P = new Pokedex(options);
+// let Pokedex = require('pokedex-promise-v2');
+// var options = {
+//   protocol: 'https',
+//   hostName: 'pokemon48.herokuapp.com',
+//   versionPath: '/api/v2/',
+//   cacheLimit: 100 * 1000, // 100s
+//   timeout: 5 * 1000 // 5s
+// }
+// let P = new Pokedex(options);
 
 // import { STATIC_PATH, WDS_PORT } from '../config'
 // import { isProd } from '../util'
@@ -46,21 +46,31 @@ export const pokemonFailure = (err) => ({ type: POKEMON_FAILURE, payload: err })
 
 
 export const getPokemons = (offset) => (dispatch) => {
+  const limit = 11;
   dispatch(pokemonRequest());
-  const interval = {
-    limit: 11,
-    offset,
-  };
+  // fetch('https://pokeapi.co/api/v2/pokemon/', {method: 'GET'})
+  //   .then((resp) => resp.json()) // Transform the data into json
+  //   .then(function (data) {
+  //     // Create and append the li's to the 
+  //     console.log('data', data);
+  //   })
+  //   .catch(function (error) {
+  //     // If there is any error you will catch them here
+  //     console.log(error)
+  //   });
+  
       function getPokemonDetail(name) {
-        return P.getPokemonByName(name).then(function (val) {
-          console.log('I got this pokemon', val)
-          return val;
+        return fetch(`https://pokeapi.co/api/v2/pokemon/${name}`, { method: 'GET' })
+          .then((resp) => resp.json())
+          .then((pokemonDetail) => {
+            console.log('I got this pokemonDetail', pokemonDetail)
+          return pokemonDetail;
         });
       }
 
       function getPokemonsFromAPI() {
-        return P.getPokemonsList(interval)
-          .then((pokemonsResponse) => {
+        return fetch(`https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${offset}`, { method: 'GET' })
+          .then((resp) => resp.json())          .then((pokemonsResponse) => {
             let promises = [];
             for (let i = 0; i < pokemonsResponse.results.length; i++) {
               console.log(pokemonsResponse.results[i].name)
@@ -91,8 +101,8 @@ export const getPokemons = (offset) => (dispatch) => {
                     type,
                   };
                 })
-                console.log('dataForState', dataForState, 'interval', interval.limit)
-                dispatch(getPokemonsSuccess({ next: pokemonsResponse.next, offset: interval.limit, data: dataForState }));
+                console.log('dataForState', dataForState, 'interval', limit)
+                dispatch(getPokemonsSuccess({ next: pokemonsResponse.next, offset: limit, data: dataForState }));
               })
               .catch((err) => {
                 dispatch(pokemonFailure(err));
