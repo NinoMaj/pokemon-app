@@ -1,6 +1,13 @@
 /* eslint-disable */
 let Pokedex = require('pokedex-promise-v2');
-let P = new Pokedex();
+var options = {
+  protocol: 'https',
+  hostName: 'https://pokemon48.herokuapp.com/',
+  versionPath: '/api/v2/',
+  cacheLimit: 100 * 1000, // 100s
+  timeout: 5 * 1000 // 5s
+}
+let P = new Pokedex(options);
 
 // import { STATIC_PATH, WDS_PORT } from '../config'
 // import { isProd } from '../util'
