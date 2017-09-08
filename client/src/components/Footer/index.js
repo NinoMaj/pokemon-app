@@ -9,7 +9,7 @@ import {
 export default () => (
   <Footer>
     <Section>
-      This a footer
+      Pokemon app, 48h challange
     </Section>
     <p>Sewed by <Link href="https://ninomajder.herokuapp.com/" target="_blank" rel="noopener noreferrer ">Nino Majder</Link></p>
   </Footer>

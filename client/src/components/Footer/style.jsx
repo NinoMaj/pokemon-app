@@ -2,20 +2,15 @@ import styled from 'styled-components';
 
 export const Footer = styled.div`
   padding: 0.01em 16px;
-  padding-top: 32px;
-  padding-bottom: 32px;
+  padding-top: 16px;
+  padding-bottom: 16px;
   background-color: #f1f1f1;
   width: auto;
   position: absolute;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
-
-  &:after, &:before {
-    content: "";
-    display: table;
-    clear: both
-  }
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin-top: 20px;
 `;
 
 export const Section = styled.div`

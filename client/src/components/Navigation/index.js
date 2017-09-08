@@ -8,7 +8,8 @@ import {
   HamburgerDashBottom,
 } from './style';
 
-import logo from '../../logo.svg';
+import LoginModal from '../LoginModal/LoginModal.js';
+import logo from '../../pokeball.png';
 
 export default class Navigation extends Component {
   state = {
@@ -55,6 +56,14 @@ export default class Navigation extends Component {
           >
             About
           </Menu.Item>
+          <Menu.Menu position='right'>
+            <Menu.Item
+              className={this.state.hamburgerOpened ? '' : 'dont-display'}
+              name="login"
+            >
+              <LoginModal />
+            </Menu.Item>
+          </Menu.Menu>
         </Menu>
       </nav>
     );

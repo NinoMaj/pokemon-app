@@ -24,7 +24,7 @@ const HamburgerDash = styled.span`
   position: absolute;
   height: 5px;
   width: 100%;
-  background: #DF3D33;
+  background: #54B7D2;
   border-radius: 5px;
   opacity: 1;
   left: 0;

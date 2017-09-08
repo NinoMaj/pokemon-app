@@ -1,9 +1,28 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Lato, Helvetica, sans-serif;
+  font-size: 16px;
+  height: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .dont-display {
+    display: none!important;
+  }
+}
+
 .App {
-  text-align: center;
+  min-height: 100%;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
+  animation: App-logo-spin 20s linear;
   height: 80px;
 }
 

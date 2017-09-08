@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Navigation from './components/Navigation/index.js';
 import Home from './components/pages/Home';
 import About from './components/pages/About';
+import PokemonDetails from './components/pages/PokemonDetails';
 import Footer from './components/Footer/index.js';
 import './App.css';
 
@@ -14,10 +15,12 @@ class App extends Component {
           <Navigation />
         </header>
         <main>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/about-us" component={About} />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/about-us" component={About} />
+            <Route path="/pokemon/:number" component={PokemonDetails} />
+          </Switch>
         </main>
-        <Footer />
       </div>
     );
   }
