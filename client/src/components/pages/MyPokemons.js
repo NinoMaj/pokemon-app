@@ -2,12 +2,12 @@ import React from 'react';
 
 import PokemonList from '../PokemonList';
 
-const Home = () => {
+const MyPokemons = () => {
   return (
     <div>
-      <PokemonList page="/" />
+      <PokemonList page="/my-pokemons" />
     </div>
   );
-};
+}
 
-export default Home;
+export default MyPokemons;

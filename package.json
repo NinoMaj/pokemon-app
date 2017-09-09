@@ -4,7 +4,16 @@
   "private": false,
   "dependencies": {
     "babel-core": "6.14.0",
-    "express": "4.13.3"
+    "body-parser": "^1.17.2",
+    "compression": "^1.7.0",
+    "cookie-parser": "^1.4.3",
+    "express": "4.13.3",
+    "express-session": "^1.15.5",
+    "mongoose": "^4.11.10",
+    "passport": "^0.4.0",
+    "passport-github2": "^0.1.10",
+    "passport-google-oauth": "^1.0.0",
+    "passport-twitter": "^1.0.4"
   },
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\"",

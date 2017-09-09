@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { Container } from 'semantic-ui-react';
+import { Container, Loader } from 'semantic-ui-react';
 
 import Image from '../Image';
 import Description from '../Description';
@@ -23,6 +23,10 @@ class PokemonDetails extends Component {
     return pokemonObject;
   }
   render() {
+    if (this.props.isLoading || this.props.pokemonsList.length === 0) {
+      return <Loader size="large" active>Catching pokemon...</Loader>;
+    }
+     
     const pokemon = this.findPokemonById(this.props.match.params.number);
     const { id, name, description, largeImgUrl, height, weight } = pokemon;
     return (
@@ -38,6 +42,7 @@ class PokemonDetails extends Component {
 
 const mapStateToProps = state => ({
   pokemonsList: state.pokemon.pokemonsList,
+  isLoading: state.pokemon.loading,
 });
 
 

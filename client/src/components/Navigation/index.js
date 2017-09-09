@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Button } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+
 import {
   Menu,
   HamburgerIcon,
@@ -8,10 +11,11 @@ import {
   HamburgerDashBottom,
 } from './style';
 
-import LoginModal from '../LoginModal/LoginModal.js';
+import LoginModal from '../LoginModal/LoginModal';
+import { logout } from '../../actions/userActions';
 import logo from '../../pokeball.png';
 
-export default class Navigation extends Component {
+class Navigation extends Component {
   state = {
     activeItem: 'home',
     hamburgerOpened: false,
@@ -24,7 +28,7 @@ export default class Navigation extends Component {
     const { activeItem } = this.state;
 
     return (
-      <nav>
+      <nav style={{ marginBottom: 20 }}>
 
         <Menu stackable inverted>
           <HamburgerIcon className={this.state.hamburgerOpened ? 'open' : ''} onClick={this.handleHamburgerClick}>
@@ -32,7 +36,11 @@ export default class Navigation extends Component {
             <HamburgerDashMiddle className={this.state.hamburgerOpened ? 'open' : ''} />
             <HamburgerDashBottom className={this.state.hamburgerOpened ? 'open' : ''} />
           </HamburgerIcon>
-          <Menu.Item>
+          <Menu.Item
+            as={Link}
+            to="/"
+            name="Logo"
+          >
             <img src={logo} style={{ height: 35 }} alt="logo" />
           </Menu.Item>
           <Menu.Item
@@ -45,6 +53,18 @@ export default class Navigation extends Component {
           >
             Home
           </Menu.Item>
+          {this.props.isLoggedIn &&
+            <Menu.Item
+              className={this.state.hamburgerOpened ? '' : 'dont-display'}
+              as={Link}
+              to="/my-pokemons"
+              name="my-pokemons"
+              active={activeItem === 'my-pokemons'}
+              onClick={this.handleItemClick}
+            >
+              Caught
+            </Menu.Item>
+          }
 
           <Menu.Item
             className={this.state.hamburgerOpened ? '' : 'dont-display'}
@@ -56,16 +76,30 @@ export default class Navigation extends Component {
           >
             About
           </Menu.Item>
-          <Menu.Menu position='right'>
-            <Menu.Item
-              className={this.state.hamburgerOpened ? '' : 'dont-display'}
-              name="login"
-            >
-              <LoginModal />
-            </Menu.Item>
-          </Menu.Menu>
+          {this.props.isLoggedIn ?
+            <Menu.Menu position="right">
+              <Menu.Item
+                className={this.state.hamburgerOpened ? '' : 'dont-display'}
+                name="logout"
+              >
+                <Button inverted color="yellow" onClick={() => this.props.logout()}>Logout</Button>
+              </Menu.Item>
+            </Menu.Menu>
+            :
+            <Menu.Menu position="right">
+              <Menu.Item
+                className={this.state.hamburgerOpened ? '' : 'dont-display'}
+                name="login"
+              >
+                <LoginModal />
+              </Menu.Item>
+            </Menu.Menu>
+          }
+
         </Menu>
       </nav>
     );
   }
 }
+
+export default connect(null, { logout })(Navigation);

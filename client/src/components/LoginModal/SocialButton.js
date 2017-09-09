@@ -21,20 +21,23 @@ const Button = styled.a`
   margin: 3px 0;
   border: 1px solid rgba(0, 0, 0, 0.2);
   text-shadow: 1px 0 1px rgba(0, 0, 0, .3);
+  padding: 10px;
+  border-radius: 3px;
 
   &:hover {
     background-color: ${props => color.dark[props.service]};
     color: #fff;
+    cursor: pointer;
   }
 `;
 
-const SocialButton = ({ service }) => (
+const SocialButton = ({ service, loginCallback }) => (
   <Button
     service={service}
     className="btn"
-    href={`/auth/${service}`}
+    // href={`/auth/${service}`}
+    onClick={loginCallback}
   >
-    <i className={`fa fa-${service} fa-lg fa-fw`} />
     {` Sign in with ${service[0].toUpperCase()}${service.slice(1)}`}
   </Button>
 )
