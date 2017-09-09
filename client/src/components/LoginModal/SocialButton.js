@@ -35,11 +35,10 @@ const SocialButton = ({ service, loginCallback }) => (
   <Button
     service={service}
     className="btn"
-    // href={`/auth/${service}`}
     onClick={loginCallback}
   >
     {` Sign in with ${service[0].toUpperCase()}${service.slice(1)}`}
   </Button>
-)
+);
 
 export default SocialButton;

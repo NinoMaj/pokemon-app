@@ -1,13 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class About extends Component {
-  render() {
-    return (
-      <div>
-        ABOUT PAGE IS UNDERCONSTRUCTION
-      </div>
-    );
-  }
-}
+const About = () => (
+  <div style={{ padding: 20 }}>
+    ABOUT PAGE IS UNDER CONSTRUCTION
+  </div>
+);
 
 export default About;

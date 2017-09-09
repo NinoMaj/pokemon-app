@@ -10,14 +10,10 @@ const Image = styled.img`
   height: 350px;
 `;
 
-
-const ImageComponent = ({ largeImgUrl }) => {
-  return (
-    <Container>
-      <Image src={largeImgUrl} alt="pokemon" />
-    </Container>
-    
-  );
-}
+const ImageComponent = ({ largeImgUrl }) => (
+  <Container>
+    <Image src={largeImgUrl} alt="pokemon" />
+  </Container>
+);
 
 export default ImageComponent;

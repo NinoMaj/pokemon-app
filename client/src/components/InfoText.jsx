@@ -6,26 +6,25 @@ const TextBox = styled.div`
   margin: 0 auto 30px auto;
 `;
 
-// color: #FFDD40 yellow, now blue
 const Title = styled.h1`
   text-align: center;
   color: #1B82B1;
+  font-size: 2em;
 `;
 
 const Text = styled.p`
   margin-top: 20px;
   text-align: center;
-  color: #4e4e4e;
+  color: #3e3e3e;
   font-size: 1.1em;
+  font-weight: bold;
 `;
 
-const InfoText = ({ title, text }) => {
-  return (
-    <TextBox>
-      <Title>{title}</Title>
-      <Text>{text}</Text>
-    </TextBox>
-  );
-};
+const InfoText = ({ title, text }) =>(
+  <TextBox>
+    <Title>{title}</Title>
+    <Text>{text}</Text>
+  </TextBox>
+);
 
 export default InfoText;

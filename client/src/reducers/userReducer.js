@@ -4,6 +4,7 @@ import {
   LOGOUT_SUCCESS,
   SAVE_POKEMON,
   DELETE_POKEMON,
+  GET_SAVED_POKEMONS,
   USER_FAILURE,
 } from '../actions/userActions';
 
@@ -24,6 +25,8 @@ const userReducer = (state = initialState, action) => {
       return Object.assign({}, state, { isLoggedIn: false, loading: false });
     case SAVE_POKEMON:
       return Object.assign({}, state, { savedPokemons: [...state.savedPokemons, action.payload], loading: false });
+    case GET_SAVED_POKEMONS:
+      return Object.assign({}, state, { savedPokemons: action.payload });
     case DELETE_POKEMON:
       return Object.assign({}, state, { savedPokemons: state.savedPokemons.filter(savedPokemon => savedPokemon !== action.payload), loading: false });
     case USER_FAILURE:
@@ -31,6 +34,6 @@ const userReducer = (state = initialState, action) => {
     default:
       return state;
   }
-}
+};
 
 export default userReducer;

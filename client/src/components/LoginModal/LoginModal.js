@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import { login } from '../../actions/userActions';
+import { displayNotification } from '../../actions/notificationActions';
 import SocialButton from './SocialButton';
 
 const ModalDescription = styled(Modal.Description)`
   margin: 5% auto;
 `;
-
 
 class LoginModal extends Component {
   state = { open: false };
@@ -17,7 +17,13 @@ class LoginModal extends Component {
   show = dimmer => () => this.setState({ dimmer, open: true });
   close = () => this.setState({ open: false });
   handleLogin = () => {
-    this.props.login();
+    this.props.loginAcion();
+    this.props.displayNotificationAction(
+      'info',
+      'Login!',
+      'You are logged in.',
+      'add user',
+    );
     this.close();
   }
 
@@ -31,14 +37,14 @@ class LoginModal extends Component {
         <Modal dimmer={dimmer} open={open} onClose={this.close}>
           <Modal.Header>Login</Modal.Header>
           <Modal.Content image>
-            <Image wrapped size='medium' src='https://assets.pokemon.com/assets/cms2/img/pokedex/full/100.png' />
+            <Image wrapped size="medium" src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/100.png" />
             <ModalDescription>
               <Header>Choose</Header>
               <p>Want to save your pokemons?</p>
               <p>Just sign in with one of this!</p>
-              <SocialButton service="twitter" loginCallback={this.handleLogin.bind(this)} />
-              <SocialButton service="google" loginCallback={this.handleLogin.bind(this)} />
-              <SocialButton service="github" loginCallback={this.handleLogin.bind(this)} />
+              <SocialButton service="twitter" loginCallback={this.handleLogin} />
+              <SocialButton service="google" loginCallback={this.handleLogin} />
+              <SocialButton service="github" loginCallback={this.handleLogin} />
             </ModalDescription>
           </Modal.Content>
           <Modal.Actions>
@@ -48,8 +54,14 @@ class LoginModal extends Component {
           </Modal.Actions>
         </Modal>
       </div>
-    )
+    );
   }
 }
 
-export default connect(null, {login})(LoginModal);
+const mapDispatchToProps = dispatch => ({
+  loginAcion: () => dispatch(login()),
+  displayNotificationAction: (notificationType, title, message, icon) =>
+    dispatch(displayNotification(notificationType, title, message, icon)),
+});
+
+export default connect(null, mapDispatchToProps)(LoginModal);

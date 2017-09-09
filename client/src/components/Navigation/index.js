@@ -13,6 +13,7 @@ import {
 
 import LoginModal from '../LoginModal/LoginModal';
 import { logout } from '../../actions/userActions';
+import { displayNotification } from '../../actions/notificationActions';
 import logo from '../../pokeball.png';
 
 class Navigation extends Component {
@@ -82,7 +83,21 @@ class Navigation extends Component {
                 className={this.state.hamburgerOpened ? '' : 'dont-display'}
                 name="logout"
               >
-                <Button inverted color="yellow" onClick={() => this.props.logout()}>Logout</Button>
+                <Button
+                  inverted
+                  color="yellow"
+                  onClick={() => {
+                    this.props.logoutAction();
+                    this.props.displayNotificationAction(
+                      'info',
+                      'Logout!',
+                      'You are logged out.',
+                      'remove user',
+                    );
+                  }}
+                >
+                  Logout
+                </Button>
               </Menu.Item>
             </Menu.Menu>
             :
@@ -102,4 +117,10 @@ class Navigation extends Component {
   }
 }
 
-export default connect(null, { logout })(Navigation);
+const mapDispatchToProps = dispatch => ({
+  logoutAction: () => dispatch(logout()),
+  displayNotificationAction: (notificationType, title, message, icon) =>
+    dispatch(displayNotification(notificationType, title, message, icon)),
+});
+
+export default connect(null, mapDispatchToProps)(Navigation);

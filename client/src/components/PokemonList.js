@@ -8,7 +8,7 @@ import Button from './Button';
 import { getPokemons } from '../actions/pokemonActions';
 import { savePokemon, deletePokemon } from '../actions/userActions';
 import InfoText from './InfoText';
-// import { displayNotification } from '../actions/notificationActions'
+import { displayNotification } from '../actions/notificationActions';
 
 
 const StyledContainer = styled(Container) `
@@ -34,40 +34,38 @@ class PokemonList extends Component {
     this.handleLoadMorePokemons = this.handleLoadMorePokemons.bind(this);
   }
 
-
-  // shouldComponentUpdate(nextProps) {
-  //   return this.props.pokemons.list.length !== nextProps.pokemons.list.length;
-  // }
-
-  handleSavingPokemon(pokemonId) {
+  handleSavingPokemon(pokemonId, event) {
+    event.stopPropagation();
     this.props.savePokemonAction(pokemonId);
-    // this.props.displayNotificationAction(
-    //   'success',
-    //   'Pokemon saved!',
-    //   'This pokemon is added to your pokemon list',
-    // )
+    this.props.displayNotificationAction(
+      'success',
+      'Pokemon caught!',
+      'This pokemon is added to your pokemon list.',
+      'checkmark',
+    );
   }
 
-  handleDeletePokemon(pokemonId) {
+  handleDeletePokemon(pokemonId, event) {
+    event.stopPropagation();
     this.props.deletePokemonAction(pokemonId);
-    // this.props.displayNotificationAction(
-    //   'info',
-    //   'Pokemon deleted',
-    //   'This pokemon has been successfully deleted from your pokemon list',
-    // );
+    this.props.displayNotificationAction(
+      'warning',
+      'Pokemon released!',
+      'This pokemon has been successfully removed from your pokemon list.',
+      'remove',
+    );
   }
 
   handleLoadMorePokemons() {
-    console.log('tu');
-    // this.props.getPokemonsAction(this.props.pokemons.offset);
+    this.props.getPokemonsAction(this.props.pokemons.offset);
   }
 
   infoText() {
     const { page } = this.props;
     if (page === '/my-pokemons') {
-      const caughtPokemons = this.props.user.savedPokemons.length;
+      const caughtPokemons = this.props.userPokemons.length;
 
-      const renderPlural = caughtPokemons > 1 ? 's' : '';
+      const renderPlural = () => caughtPokemons > 1 ? 's' : '';
 
       const title = caughtPokemons === 0 ?
         'You haven`t caught any pokemons yet.'
@@ -75,7 +73,7 @@ class PokemonList extends Component {
         `You have caught ${caughtPokemons} pokemon${renderPlural()} till now`;
 
       const text = caughtPokemons > 0 ?
-        'If you want to release some of them into the wild, press on pokemon and then on open ball'
+        'If you want to release some of them into the wild, press on pokemon and then on pokeball.'
         :
         '';
       return (
@@ -88,7 +86,7 @@ class PokemonList extends Component {
       return (
         <InfoText
           title="Pokemon app"
-          text="Press on a pokemon and then on pokeball to catch him. To check his stats press on his name."
+          text="If you are logged in you can press on a pokemon and then on pokeball to catch him. To check his stats press on his name."
         />
       );
     }
@@ -126,6 +124,8 @@ class PokemonList extends Component {
             type={pokemon.type}
             page={page}
             savePokemon={this.handleSavingPokemon}
+            savedPokemons={this.props.userPokemons}
+            isUserLoggedIn={this.props.isUserLoggedIn}
           />
         ));
       }
@@ -141,18 +141,16 @@ class PokemonList extends Component {
         <StyledContainer>
           {this.infoText()}
           <StyledCardGroup>
-            {this.props.pokemons.loading ?
-              <Loader size="large" active>Catching pokemons...</Loader>
-              :
-              pokemonList
-            }
+            {pokemonList}
+            {this.props.pokemons.loading &&
+              <Loader size="large" active inline="centered">Catching pokemons...</Loader>}
           </StyledCardGroup>
           {!this.props.pokemons.loading &&
             <Button
               color="red"
-              size="big"
+              size="huge"
               text="Load more"
-              onClick={this.handleLoadMorePokemons}
+              loadMorePokemons={this.handleLoadMorePokemons}
             />}
         </StyledContainer>
       </div>
@@ -163,14 +161,15 @@ class PokemonList extends Component {
 const mapStateToProps = state => ({
   pokemons: state.pokemon,
   userPokemons: state.user.savedPokemons,
+  isUserLoggedIn: state.user.isLoggedIn,
 });
 
 const mapDispatchToProps = dispatch => ({
   getPokemonsAction: offset => dispatch(getPokemons(offset)),
   savePokemonAction: id => dispatch(savePokemon(id)),
   deletePokemonAction: id => dispatch(deletePokemon(id)),
-  // displayNotificationAction: (notifType, title, message) =>
-  //   dispatch(displayNotification(notifType, title, message)),
+  displayNotificationAction: (notificationType, title, message, icon) =>
+    dispatch(displayNotification(notificationType, title, message, icon)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PokemonList);
