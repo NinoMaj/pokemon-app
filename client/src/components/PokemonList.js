@@ -25,6 +25,12 @@ const StyledCardGroup = styled(Card.Group) `
   }
 `;
 
+const LoaderText = styled.span`
+  color: #3e3e3e;
+  font-size: 1em;
+  font-weight: bold;
+`;
+
 class PokemonList extends Component {
   constructor(props) {
     super(props);
@@ -145,7 +151,7 @@ class PokemonList extends Component {
           </StyledCardGroup>
           {this.props.pokemons.loading &&
             <div style={{ marginTop: 30, marginBottom: 50 }}>
-              <Loader size="large" active inline="centered">Catching pokemons...</Loader>
+            <Loader size="large" active inline="centered"><LoaderText>Catching pokemons...</LoaderText></Loader>
             </div>
           }
           {!this.props.pokemons.loading &&
