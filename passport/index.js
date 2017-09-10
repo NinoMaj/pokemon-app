@@ -39,7 +39,7 @@ const passportCallback = (service, req, token, refreshToken, profile, done) => {
         // if there is an error, stop everything and return that
         // for example an error connecting to the database
         if (err) return done(err);
-        // if the user is found, then log him/her in
+        // if the user is found, then log him/her ind
         if (user) {
           // if there is a user id already but no token (user was linked at one
           // point and then removed), just add our token and profile info.

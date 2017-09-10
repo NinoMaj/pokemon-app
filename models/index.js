@@ -13,5 +13,5 @@ const connect = (uri) => {
   });
 };
 
-export default connect;
+module.exports = connect;
 
