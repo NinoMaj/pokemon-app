@@ -8,7 +8,7 @@ const StatsContainer = styled.div`
   flex-direction: column;
   align-item: center;
   justify-content: space-around;
-  background-color: #A4A4A4;
+  background-color: #30A7D7;
   border-radius: 5px;
   padding: 20px;
   color: #fff;
@@ -32,7 +32,7 @@ const Stats = ({ stats }) => (
   <StatsContainer>
     <StatsTitle>Stats:</StatsTitle>
     <div>
-      {stats.map(stat => <div key={stat.id}><StatText>{`${stat.name}: `}</StatText><Rating rating={Math.round(stat.value / 10)} icon="star" maxRating={10} /></div>)}
+      {stats.map(stat => <div key={stat.id}><StatText>{`${stat.name}: `}</StatText><Rating rating={Math.round(stat.value / 10)} icon="star" maxRating={10} disabled /></div>)}
     </div>
   </StatsContainer>
 );

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { Link } from 'react-router-dom';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
@@ -13,8 +13,23 @@ const ImgContainer = styled.div`
   margin-bottom: 15px;
 `;
 
+const bounce = keyframes`
+  0%, 100% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.95)
+  }
+
+  75% {
+    transform: translateY(-4px)
+  }
+`;
+
 const StyledCard = styled(Card) `
   box-shadow: 0 1px 2px 1px rgba(25,25,25,0.2)!important;
+  &:hover {
+    animation: ${bounce} 0.3s 1;
+  }
+}
 `;
 
 const StyledImage = styled(Image) `
@@ -41,6 +56,19 @@ const RealeasePokemon = styled.div`
   position: absolute;
   left: 60%;
   top: 5%;
+`;
+
+const CardHeader = styled(Card.Header)`
+  color: #1e1e1e;
+  font-weight: bold;
+  font-size: 1.2em;
+  &:hover {
+    color: #DF3D33;
+  }
+`;
+
+const CardDescription = styled(Card.Description) `
+  color: #3e3e3e;
 `;
 
 class PokemonItem extends Component {
@@ -81,18 +109,19 @@ class PokemonItem extends Component {
               </ReactCSSTransitionGroup>
             }
           </ImgContainer>
-          <Card.Header
-            as={Link}
+          <Link
             to={`/pokemon/${id}`}
           >
-            {name}
-          </Card.Header>
-          <Card.Meta>
-            {`Pokemon: # ${id}`}
-          </Card.Meta>
-          <Card.Description>
-            {description}
-          </Card.Description>
+            <CardHeader>
+              {name}
+            </CardHeader>
+            <Card.Meta>
+              {`Pokemon: # ${id}`}
+            </Card.Meta>
+            <CardDescription>
+              {description}
+            </CardDescription>
+          </Link>
         </Card.Content>
       </StyledCard>
     );

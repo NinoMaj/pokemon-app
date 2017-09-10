@@ -11,12 +11,13 @@ import PokemonDetails from './components/pages/PokemonDetails';
 import Notifications from './components/Notifications';
 import './App.css';
 import { getPokemons } from './actions/pokemonActions';
-import { getSavedPokemons } from './actions/userActions';
+import { getSavedPokemons, loggedCheck } from './actions/userActions';
 
 class App extends Component {
   componentDidMount() {
     this.props.getPokemons(this.props.offset);
     this.props.getSavedPokemons();
+    this.props.loggedCheck();
   }
   render() {
     return (
@@ -54,4 +55,4 @@ const mapStateToProps = state => ({
   offset: state.pokemon.offset,
 });
 
-export default withRouter(connect(mapStateToProps, { getPokemons, getSavedPokemons })(App));
+export default withRouter(connect(mapStateToProps, { getPokemons, getSavedPokemons, loggedCheck })(App));

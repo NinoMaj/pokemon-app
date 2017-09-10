@@ -10,7 +10,12 @@ export const userRequest = () => ({ type: USER_REQUEST });
 
 export const userFailure = err => ({ type: USER_FAILURE, payload: err });
 
-export const login = () => ({ type: LOGIN_SUCCESS });
+export const login = () => {
+  localStorage.setItem('pokemonappLogin', 'true');
+  return ({ type: LOGIN_SUCCESS });
+};
+
+export const loggedCheck = () => localStorage.getItem('pokemonappLogin') === 'true' ? { type: LOGIN_SUCCESS } : { type: LOGOUT_SUCCESS };
 
 export const savePokemon = (id) => {
   // add new pokemon to localStorage
@@ -38,4 +43,7 @@ export const getSavedPokemons = () => {
   return ({ type: GET_SAVED_POKEMONS, payload: savedInLocalStorage });
 };
 
-export const logout = () => ({ type: LOGOUT_SUCCESS });
+export const logout = () => {
+  localStorage.setItem('pokemonappLogin', 'false');
+  return ({ type: LOGOUT_SUCCESS });
+};

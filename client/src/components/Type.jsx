@@ -9,9 +9,7 @@ const TypeContainer = styled.div`
   align-item: center;
   justify-content: space-around;
   border-radius: 5px;
-  padding: 20px;
   color: #fff;
-  border: 2px solid #F03E33;
   margin-bottom: 40px;
 `;
 

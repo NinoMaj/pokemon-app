@@ -8,6 +8,10 @@ import Description from '../Description';
 import Stats from '../Stats';
 import Type from '../Type';
 
+const DetailsContainer = styled(Container)`
+  padding-top: 20px;
+`;
+
 const FlexBox = styled.div`
   display: flex;
   flex-direction: row;
@@ -36,7 +40,7 @@ class PokemonDetails extends Component {
     const pokemon = this.findPokemonById(this.props.match.params.number);
     const { id, name, description, largeImgUrl, height, weight, stats, type } = pokemon;
     return (
-      <Container>
+      <DetailsContainer>
         <Title>{`${name} #${id}`}</Title>
         <FlexBox>
           <Image largeImgUrl={largeImgUrl} />
@@ -46,7 +50,7 @@ class PokemonDetails extends Component {
           <Stats stats={stats} />
           <Type type={type} />
         </FlexBox>
-      </Container>
+      </DetailsContainer>
     );
   }
 }

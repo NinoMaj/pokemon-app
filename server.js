@@ -2,7 +2,6 @@ const express = require('express');
 
 const app = express();
 
-
 app.set('port', process.env.PORT || 3001);
 
 // Express only serves static assets in production

@@ -142,9 +142,12 @@ class PokemonList extends Component {
           {this.infoText()}
           <StyledCardGroup>
             {pokemonList}
-            {this.props.pokemons.loading &&
-              <Loader size="large" active inline="centered">Catching pokemons...</Loader>}
           </StyledCardGroup>
+          {this.props.pokemons.loading &&
+            <div style={{ marginTop: 30, marginBottom: 50 }}>
+              <Loader size="large" active inline="centered">Catching pokemons...</Loader>
+            </div>
+          }
           {!this.props.pokemons.loading &&
             <Button
               color="red"
