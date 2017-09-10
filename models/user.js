@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 // define the User model schema
 const UserSchema = new mongoose.Schema({
