@@ -6,7 +6,7 @@ const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
-import db from './models';
+const db = require('./models');
 
 const app = express();
 
@@ -39,7 +39,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 const redirectObj = {
-  successRedirect: '/'
+  successRedirect: '/',
   failureRedirect: '/',
 }
 
