@@ -46,7 +46,7 @@ class PokemonList extends Component {
     this.props.displayNotificationAction(
       'success',
       'Pokemon caught!',
-      'This pokemon is added to your pokemon list.',
+      'Pokemon is added to your list.',
       'checkmark',
     );
   }

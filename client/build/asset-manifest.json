@@ -1,14 +1,15 @@
 {
   "main.css": "static/css/main.02052493.css",
   "main.css.map": "static/css/main.02052493.css.map",
-  "main.js": "static/js/main.3a642fe2.js",
-  "main.js.map": "static/js/main.3a642fe2.js.map",
+  "main.js": "static/js/main.570e75da.js",
+  "main.js.map": "static/js/main.570e75da.js.map",
   "static\\media\\flags.png": "static/media/flags.9c74e172.png",
   "static\\media\\icons.eot": "static/media/icons.674f50d2.eot",
   "static\\media\\icons.svg": "static/media/icons.912ec66d.svg",
   "static\\media\\icons.ttf": "static/media/icons.b06871f2.ttf",
   "static\\media\\icons.woff": "static/media/icons.fee66e71.woff",
   "static\\media\\icons.woff2": "static/media/icons.af7ae505.woff2",
+  "static\\media\\login-image.png": "static/media/login-image.028f6bd8.png",
   "static\\media\\pokeball.png": "static/media/pokeball.435b7042.png",
   "static\\media\\release-pokemon.png": "static/media/release-pokemon.ca9f1186.png"
 }

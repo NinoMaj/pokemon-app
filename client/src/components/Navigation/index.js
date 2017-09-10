@@ -29,7 +29,7 @@ class Navigation extends Component {
     const { activeItem } = this.state;
 
     return (
-      <nav style={{ marginBottom: 20 }}>
+      <nav style={{ marginBottom: 20, marginTop: -2 }}>
 
         <Menu stackable inverted>
           <HamburgerIcon className={this.state.hamburgerOpened ? 'open' : ''} onClick={this.handleHamburgerClick}>

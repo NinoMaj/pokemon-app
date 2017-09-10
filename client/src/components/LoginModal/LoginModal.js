@@ -6,9 +6,10 @@ import styled from 'styled-components';
 import { login } from '../../actions/userActions';
 import { displayNotification } from '../../actions/notificationActions';
 import SocialButton from './SocialButton';
+import loginImage from '../../login-image.png';
 
 const ModalDescription = styled(Modal.Description)`
-  margin: 5% auto;
+ 
 `;
 
 class LoginModal extends Component {
@@ -34,10 +35,10 @@ class LoginModal extends Component {
       <div>
         <Button inverted color="yellow" onClick={this.show('blurring')}>Login</Button>
 
-        <Modal dimmer={dimmer} open={open} onClose={this.close}>
+        <Modal dimmer={dimmer} open={open} onClose={this.close} size="small">
           <Modal.Header>Login</Modal.Header>
           <Modal.Content image>
-            <Image wrapped size="medium" src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/100.png" />
+            <Image wrapped size="medium" src={loginImage} />
             <ModalDescription>
               <Header>Choose</Header>
               <p>Want to save your pokemons?</p>
